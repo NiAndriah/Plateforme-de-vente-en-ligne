@@ -23,3 +23,15 @@ span.badge {
     font-size: 10px;
     margin-left: -8px;
 }
+.nav .nav-item .nav-link {
+    font-size: 18px;
+    color: rgba(80, 80, 80, 1);
+}
+.nav .nav-item .nav-link:hover {
+    font-size: 18px;
+    color: rgba(80, 80, 80, 0.5);
+}
+.nav .nav-item .nav-link.active {
+    border: none;
+    text-decoration: underline;
+}
