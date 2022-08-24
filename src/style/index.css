@@ -1,22 +1,23 @@
 .bg-orange {
     background-color: orange;
 }
-.navbar-brand a.nav-link {
+.navbar-brand a {
     font-size: 24px;
     font-weight: bold;
     color: #ff0000;
+    text-decoration: none;
 }
-.navbar-brand .nav-link:hover {
+.navbar-brand a:hover {
     text-decoration: underline;
     color: #ff0000;
 }
 input.form-control {
     border-radius: 3px;
 }
-form a.nav-link svg {
+form a svg {
     color: rgba(128, 128, 128, 1);
 }
-form a.nav-link svg:hover {
+form a svg:hover {
     color: rgba(128, 128, 128, 0.8);
 }
 span.badge {
