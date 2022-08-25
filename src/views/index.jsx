@@ -6,6 +6,7 @@ import { Home } from "./home";
 import { Cart } from "./cart";
 
 const App = () => {
+  const [ordered, setOrdered] = useState(0);
   const [category, setCategory] = useState(0);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filtered, setFitered] = useState([]);
@@ -24,13 +25,19 @@ const App = () => {
   return (
     <Fragment>
         <BrowserRouter>
-          <NavBar setIsFiltered={setIsFiltered} setResult={setResult}/>
+          <NavBar 
+            setIsFiltered={setIsFiltered} 
+            setResult={setResult}
+            ordered={ordered}
+          />
           <Routes>
             <Route exact path="/" element={<Home 
                 loadCategory={loadCategory} 
                 category={category}
                 isFiltered={isFiltered}
                 filtered={filtered}
+                ordered={ordered}
+                setOrdered={setOrdered}
                 data={isFiltered?filtered:list[category]}
               />} 
             />
