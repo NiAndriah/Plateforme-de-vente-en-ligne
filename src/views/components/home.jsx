@@ -1,5 +1,5 @@
 import React from "react";
-import { SideMenu, List } from "../component";
+import { SideMenu, List } from "../../component";
 import { Row, Container, Col } from 'react-bootstrap';
 
 export const Home = ({ loadCategory, category, ordered, setOrdered, data }) => (

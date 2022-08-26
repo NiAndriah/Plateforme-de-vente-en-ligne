@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
-import { NavBar } from "../component";
-import { list } from "../component/data";
+import { NavBar } from "../../component";
+import { list } from "../../component/data";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./home";
 import { Cart } from "./cart";
@@ -13,7 +13,7 @@ const App = () => {
   const loadCategory= (index)=> {
     setCategory(index);
   }
-  const setResult = (input)=> {
+  const filterResults = (input)=> {
     const fullList = list.flat();
     const data = fullList.filter(item => { 
       const val = input.toLowerCase();
@@ -27,7 +27,7 @@ const App = () => {
         <BrowserRouter>
           <NavBar 
             setIsFiltered={setIsFiltered} 
-            setResult={setResult}
+            filterResults={filterResults}
             ordered={ordered}
           />
           <Routes>

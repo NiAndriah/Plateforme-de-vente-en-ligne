@@ -4,8 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardImg, Row, Col, Container, Navbar, NavbarBrand, NavLink, Form, FormControl, 
         Badge, Nav, NavItem, Button, Modal, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { addToCart } from "../lib/actions";
+import { useDispatch } from "react-redux/es/exports";
 
-export const NavBar = ({ setIsFiltered, setResult, ordered })=> {
+export const NavBar = ({ setIsFiltered, filterResults, ordered })=> {
     return(
         <Navbar expand='lg' className='mb-5 bg-orange'>
             <Container fluid>
@@ -21,7 +23,7 @@ export const NavBar = ({ setIsFiltered, setResult, ordered })=> {
                                 setIsFiltered(true);
                             else
                                 setIsFiltered(false);
-                            setResult(e.target.value);
+                            filterResults(e.target.value);
                         }
                     }/>
                     <Link to='/cart'>
@@ -62,6 +64,10 @@ export const KitChenSink = ({ item, ordered, setOrdered })=> {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [qty, setQty] = useState(1);
+    const dispatch = useDispatch();
+    const add = (item, qty)=> {
+        dispatch(addToCart(item, qty));
+    }
 
     return(
         <>
@@ -116,8 +122,9 @@ export const KitChenSink = ({ item, ordered, setOrdered })=> {
                     Annuler
                 </Button>
                 <Button variant="success" onClick={()=>{
-                    setOrdered(ordered+1)
-                    handleClose()
+                        setOrdered(ordered+1)
+                        handleClose()
+                        add(item, qty)
                     }}>
                     Ajouter
                 </Button>
