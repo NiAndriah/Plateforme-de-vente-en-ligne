@@ -5,9 +5,10 @@ import { Card, CardImg, Row, Col, Container, Navbar, NavbarBrand, NavLink, Form,
         Badge, Nav, NavItem, Button, Modal, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { addToCart } from "../lib/actions";
-import { useDispatch } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 
-export const NavBar = ({ setIsFiltered, filterResults, ordered })=> {
+export const NavBar = ({ setIsFiltered, filterResults })=> {
+    const len = useSelector(state => state.items);
     return(
         <Navbar expand='lg' className='mb-5 bg-orange'>
             <Container fluid>
@@ -30,7 +31,7 @@ export const NavBar = ({ setIsFiltered, filterResults, ordered })=> {
                         <FontAwesomeIcon icon={faShoppingBag} className='fa-2x ms-2' />
                     </Link>
                     <h6>
-                        <Badge bg='success' className="rounded-pill">{ordered}</Badge>
+                        <Badge bg='success' className="rounded-pill">{len.length}</Badge>
                     </h6>
                 </Form>
             </Container>
@@ -55,11 +56,11 @@ export const SideMenu = ( {loadCategory, category} ) => {
 
 export const List = ({ data, ordered, setOrdered })=> (
     <Row>
-        {data.map(item => <KitChenSink ordered={ordered} setOrdered={setOrdered} key={item.ref} item={item}/>)}
+        {data.map(item => <KitChenSink key={item.ref} item={item}/>)}
     </Row>
 )
 
-export const KitChenSink = ({ item, ordered, setOrdered })=> {
+export const KitChenSink = ({ item })=> {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -71,7 +72,7 @@ export const KitChenSink = ({ item, ordered, setOrdered })=> {
 
     return(
         <>
-            <Col xs={6} sm={{ span:12, offset:3 }} md={{ span:6, offset:0 }} lg={4}>
+            <Col md={6} xl={4}>
                 <Card className='mb-3' style={{ maxWidth:'18rem' }}>
                     <CardImg height={170} src={`assets/${item.category}/${item.image}`} />
                     <Card.Body>
@@ -83,7 +84,7 @@ export const KitChenSink = ({ item, ordered, setOrdered })=> {
                             </Col>
                             <Col sm={6}>
                                 <Card.Text>
-                                    €{ item.price }/{ item.unit }
+                                    € { item.price }/{ item.unit }
                                 </Card.Text>
                                 <Button variant='warning' onClick={handleShow}>Voir produit</Button>
                             </Col>
@@ -122,7 +123,6 @@ export const KitChenSink = ({ item, ordered, setOrdered })=> {
                     Annuler
                 </Button>
                 <Button variant="success" onClick={()=>{
-                        setOrdered(ordered+1)
                         handleClose()
                         add(item, qty)
                     }}>
