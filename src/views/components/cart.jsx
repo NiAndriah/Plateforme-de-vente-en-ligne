@@ -6,28 +6,50 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Image, Button } from 'react-bootstrap';
 import { updateToCart, removeFromCart } from "../../lib/actions";
 
-export const Cart = () => (
-    <Container>
-        <Table responsive='sm'>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Libellé</th>
-                    <th>Prix</th>
-                    <th>Quantité</th>
-                    <th>Somme</th>
-                </tr>
-            </thead>
-            <Items />
-        </Table>
-    </Container>
-)
+export const Cart = () => {
+    const [total, setTotal] = useState(0);
+    useEffect(()=>{
+        setTotal(10);
+    }, [setTotal])
+    return (
+        <Container>
+            <Table responsive='sm'>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Libellé</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Somme</th>
+                    </tr>
+                </thead>
+                <Items />
+                <tfoot>
+                    <tr>
+                        <td style={{ border: 'none' }}></td>
+                        <td style={{ border: 'none' }}></td>
+                        <td style={{ border: 'none' }}></td>
+                        <td style={{ border: 'none' }}></td>
+                        <td>
+                            € { total.toFixed(2) }
+                        </td>
+                        <td style={{ border: 'none' }}>
+                            <Button variant="success">
+                                Confirmer
+                            </Button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </Table>
+        </Container>
+    )
+}
 
 const Items = ()=> {
     const items = useSelector(state => state.items);
     return(
         <>
-            { items.map((item, index) => <Content key={index} item={item}/>) }
+            { items.map((item, index) => <Content key={index} item={item} />) }
         </>
     )
 }

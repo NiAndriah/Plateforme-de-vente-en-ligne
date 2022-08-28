@@ -1,11 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { NavBar } from "../../component";
 import { list } from "../../component/data";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./home";
 import { Cart } from "./cart";
 
-const App = () => {
+const App = props => {
+  const { items, saveToLocalStorage } = props;
   const [category, setCategory] = useState(0);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filtered, setFitered] = useState([]);
@@ -21,6 +22,9 @@ const App = () => {
     });
     setFitered(data);
   }
+  useEffect(() => {
+    saveToLocalStorage(items);
+  }, [saveToLocalStorage, items])
   return (
     <Fragment>
         <BrowserRouter>
