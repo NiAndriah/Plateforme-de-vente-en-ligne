@@ -112,14 +112,14 @@ export const KitChenSink = ({ item })=> {
                             €{item.price}/{item.unit}
                         </Col>
                         <Col>
-                            <Button variant="danger" onClick={()=>setQty(qty>1?qty-1:1)}>-</Button>
+                            <Button variant="secondary" onClick={()=>setQty(qty>1?qty-1:1)}>-</Button>
                                 <strong className="mx-2">{qty}</strong>
-                            <Button variant="danger" onClick={()=>setQty(qty+1)}>+</Button>
+                            <Button variant="secondary" onClick={()=>setQty(qty+1)}>+</Button>
                         </Col>
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="danger" onClick={handleClose}>
                     Annuler
                 </Button>
                 <Button variant="success" onClick={()=>{

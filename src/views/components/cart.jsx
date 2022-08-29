@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Image, Button } from 'react-bootstrap';
 import { updateToCart, removeFromCart } from "../../lib/actions";
+import { Link } from "react-router-dom";
+import { v4 } from 'uuid';
 
 export const Cart = () => {
-    const [total, setTotal] = useState(0);
-    useEffect(()=>{
-        setTotal(10);
-    }, [setTotal])
+    const items = useSelector(state => state.items);
+    let total = 0;
     return (
         <Container>
             <Table responsive='sm'>
@@ -20,37 +20,32 @@ export const Cart = () => {
                         <th>Libellé</th>
                         <th>Prix</th>
                         <th>Quantité</th>
-                        <th>Somme</th>
+                        <th>Sous total</th>
+                        <th style={{ border: 'none', paddingLeft: '10px' }} width='0.5'>Action</th>
                     </tr>
                 </thead>
-                <Items />
+                <tbody>
+                    { items.map((item, index) => {
+                        total += item.details.price * item.quantity;
+                        return <Content key={index} item={item}/>
+                    }) }
+                </tbody>
                 <tfoot>
                     <tr>
-                        <td style={{ border: 'none' }}></td>
-                        <td style={{ border: 'none' }}></td>
-                        <td style={{ border: 'none' }}></td>
-                        <td style={{ border: 'none' }}></td>
-                        <td>
-                            € { total.toFixed(2) }
+                        <Colspan />
+                        <td style={{ border: 'none', fontSize: '18px', color: 'grey' }}>Total € { total.toFixed(2) } 
                         </td>
-                        <td style={{ border: 'none' }}>
-                            <Button variant="success">
-                                Confirmer
-                            </Button>
+                        <td style={{ border: 'none'}}>
+                            <Link to='#'>
+                                <Button variant="primary">
+                                    Confirmer
+                                </Button>
+                            </Link>
                         </td>
                     </tr>
                 </tfoot>
             </Table>
         </Container>
-    )
-}
-
-const Items = ()=> {
-    const items = useSelector(state => state.items);
-    return(
-        <>
-            { items.map((item, index) => <Content key={index} item={item} />) }
-        </>
     )
 }
 
@@ -68,28 +63,35 @@ const Content = ({ item }) => {
         dispatch(updateToCart(item.id, qty));
     }, [dispatch, qty, item.id]);
     return(
-        <tbody>
-            <tr>
-                <td>
-                    <Image src={`assets/${item.details.category}/${item.details.image}`} 
-                    height={30}/>
-                </td>
-                <td>{ item.details.name }</td>
-                <td>{ item.details.price }/{ item.details.unit }</td>
-                <td>
-                    <Button variant="secondary" onClick={()=>update('decrement')}> - </Button>
-                        <span className="mx-3">
-                            { qty }
-                        </span> 
-                    <Button variant="secondary" onClick={()=>update('increment')}> + </Button>
-                </td>
-                <td>€ { (item.details.price * item.quantity).toFixed(2) }</td>
-                <td style={{ border: 'none', color: '#f00' }}>
-                    <Button variant="#" onClick={()=>remove()}>
-                        <FontAwesomeIcon icon={ faTrash } style={{ color: '#f00' }}/>
-                    </Button>
-                </td>
-            </tr>
-        </tbody>
+        <tr>
+            <td>
+                <Image src={`assets/${item.details.category}/${item.details.image}`} 
+                height={30}/>
+            </td>
+            <td>{ item.details.name }</td>
+            <td>{ item.details.price }/{ item.details.unit }</td>
+            <td>
+                <Button variant="secondary" onClick={()=>update('decrement')}> - </Button>
+                    <span className="mx-3">
+                        { qty }
+                    </span> 
+                <Button variant="secondary" onClick={()=>update('increment')}> + </Button>
+            </td>
+            <td>€ { (item.details.price * item.quantity).toFixed(2) }</td>
+            <td style={{ border: 'none', color: '#f00' }}>
+                <Button variant="#" onClick={()=>remove()}>
+                    <FontAwesomeIcon icon={ faTrash } style={{ color: '#f00' }}/>
+                </Button>
+            </td>
+        </tr>
     )
+}
+
+const Colspan = ()=> {
+    const tabs = []
+    for (let i = 0; i < 4; i++)
+        tabs.push(<td key={v4()} style={{ border: 'none'}}></td>);
+    return (
+        tabs
+    );
 }
