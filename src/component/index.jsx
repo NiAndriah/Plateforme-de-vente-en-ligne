@@ -31,7 +31,7 @@ export const NavBar = ({ setIsFiltered, filterResults })=> {
                         <FontAwesomeIcon icon={faShoppingBag} className='fa-2x ms-2' />
                     </Link>
                     <h6>
-                        <Badge bg='success' className="rounded-pill">{len.length}</Badge>
+                        <Badge bg='success' className="rounded-pill">{len.length?len.length:''}</Badge>
                     </h6>
                 </Form>
             </Container>

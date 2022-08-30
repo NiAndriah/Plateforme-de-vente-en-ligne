@@ -4,6 +4,7 @@ import { list } from "../../component/data";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./home";
 import { Cart } from "./cart";
+import { Checkout } from "./checkout";
 
 const App = props => {
   const { items, saveToLocalStorage } = props;
@@ -42,6 +43,7 @@ const App = props => {
               />} 
             />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />}/>
           </Routes>
         </BrowserRouter>
     </Fragment>

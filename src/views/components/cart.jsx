@@ -36,7 +36,7 @@ export const Cart = () => {
                         <td style={{ border: 'none', fontSize: '18px', color: 'grey' }}>Total € { total.toFixed(2) } 
                         </td>
                         <td style={{ border: 'none'}}>
-                            <Link to='#'>
+                            <Link to='/checkout'>
                                 <Button variant="primary">
                                     Confirmer
                                 </Button>
