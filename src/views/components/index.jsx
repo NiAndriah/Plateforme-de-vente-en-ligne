@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./home";
 import { Cart } from "./cart";
 import { Checkout } from "./checkout";
+import UserProfilContextProvider from "../../lib/userProfilContext";
 
 const App = props => {
   const { items, saveToLocalStorage } = props;
@@ -33,18 +34,20 @@ const App = props => {
             setIsFiltered={setIsFiltered} 
             filterResults={filterResults}
           />
-          <Routes>
-            <Route exact path="/" element={<Home 
-                loadCategory={loadCategory} 
-                category={category}
-                isFiltered={isFiltered}
-                filtered={filtered}
-                data={isFiltered?filtered:list[category]}
-              />} 
-            />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />}/>
-          </Routes>
+          <UserProfilContextProvider>
+            <Routes>
+              <Route exact path="/" element={<Home 
+                  loadCategory={loadCategory} 
+                  category={category}
+                  isFiltered={isFiltered}
+                  filtered={filtered}
+                  data={isFiltered?filtered:list[category]}
+                  />} 
+                />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />}/>
+            </Routes>
+          </UserProfilContextProvider>
         </BrowserRouter>
     </Fragment>
   );
