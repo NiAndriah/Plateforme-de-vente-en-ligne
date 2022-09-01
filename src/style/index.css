@@ -50,3 +50,6 @@ span.badge {
     border: none;
     text-decoration: underline;
 }
+.btn:hover {
+    color: #ff0000;
+}

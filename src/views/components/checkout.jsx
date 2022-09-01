@@ -26,7 +26,7 @@ export const Checkout = ()=> {
                         <Form.Control size="md" type="text" placeholder="Code" className="mb-5"></Form.Control>
                     </Col>
                 </Row>
-                <Button variant="" size='md' style={{ backgroundColor: '#fab25d', color: 'white', width: '100%' }}>Confirmer</Button>
+                <Button variant="" size='lg' style={{ backgroundColor: '#FFAA00', color: 'white', width: '100%' }}>Confirmer</Button>
             </Col>
         </Container>
     )
