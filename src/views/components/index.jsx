@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./home";
 import { Cart } from "./cart";
 import { Checkout } from "./checkout";
+import { Confirm } from "./confirm";
 import UserProfilContextProvider from "../../lib/userProfilContext";
 
 const App = props => {
@@ -46,6 +47,7 @@ const App = props => {
                 />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />}/>
+              <Route path="/confirm" element={<Confirm />}/>
             </Routes>
           </UserProfilContextProvider>
         </BrowserRouter>

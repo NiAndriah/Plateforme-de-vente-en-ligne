@@ -24,6 +24,8 @@ export default function onlineState(state = initialState, action) {
         })
         case actions.SAVE_TO_CART : saveToLocalStorage(action.payload.items);
             return state;
+        case actions.RESET_FROM_CART : localStorage.setItem("items", []);
+            return Object.assign({}, state, {items : []});
         default : return state;
     }
 }   

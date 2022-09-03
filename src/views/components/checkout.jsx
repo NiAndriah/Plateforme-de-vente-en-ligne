@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { userProfilContext } from "../../lib/userProfilContext";
+import { Link } from "react-router-dom";
 
 export const Checkout = ()=> {
     const [isValid, setIsValid] = useState(false);
@@ -61,8 +62,10 @@ export const Checkout = ()=> {
                         onChange={e => setUserProfilContext({[e.target.name]: e.target.value})}></Form.Control>
                     </Col>
                 </Row>
-                <Button variant="" size='lg' style={{ backgroundColor: '#FFAA00', color: 'white', width: '100%' }} 
-                className={`${!isValid && 'disabled'}`}>Confirmer</Button>
+                <Link to='/confirm'>
+                    <Button variant="warning" size='lg' style={{ backgroundColor: '#FFAA00', color: 'white', width: '100%' }} 
+                    className={`${!isValid && 'disabled'}`}>Confirmer</Button>
+                </Link>
             </Col>
         </Container>
     )

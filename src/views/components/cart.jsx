@@ -37,7 +37,7 @@ export const Cart = () => {
                         </td>
                         <td style={{ border: 'none'}}>
                             <Link to='/checkout'>
-                                <Button variant="primary">
+                                <Button variant="primary" className={`${!items.length && 'disabled'}`}>
                                     Confirmer
                                 </Button>
                             </Link>
